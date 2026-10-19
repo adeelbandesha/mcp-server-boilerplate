@@ -5,9 +5,12 @@ node_modules/
 
 # Environment Secrets (CRITICAL FOR SAFETY)
 .env
-.env.production
-.env.local
+.env.*
 *.env
+!.env.example
+
+# Logs
+*.log
 
 # Operating System Files
 .DS_Store

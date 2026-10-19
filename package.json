@@ -1,0 +1,42 @@
+{
+  "name": "mcp-server-boilerplate",
+  "version": "1.0.0",
+  "description": "Modular Model Context Protocol server hub: drop a tool module into src/tools and it is served over stdio or Streamable HTTP.",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "mcp-server",
+    "typescript",
+    "zod",
+    "llm",
+    "ai-tools"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=22.9"
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "start": "node --env-file-if-exists=.env dist/index.js",
+    "start:http": "MCP_TRANSPORT=http node --env-file-if-exists=.env dist/index.js",
+    "test": "npm run build && node --test"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/express": "^2.0.2",
+    "@modelcontextprotocol/node": "^2.1.1",
+    "@modelcontextprotocol/server": "^2.3.1",
+    "express": "^5.3.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^22.20.5",
+    "typescript": "^7.0.2"
+  }
+}
