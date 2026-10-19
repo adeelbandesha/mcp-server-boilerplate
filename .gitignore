@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+/dist
+/build
+
+# Environment Secrets (CRITICAL FOR SAFETY)
+.env
+.env.production
+.env.local
+*.env
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# IDE Tracks
+.vscode/
+.idea/
+*.suo
+*.ntvs
