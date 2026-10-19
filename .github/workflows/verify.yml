@@ -1,0 +1,27 @@
+name: Continuous Integration Security Check
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  verify-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code Repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js Environment
+      uses: actions/setup-node@v4
+      with:
+        node-with: '20'
+        cache: 'npm'
+
+    - name: Install Dependencies Safely
+      run: npm ci
+
+    - name: Run TypeScript Strict Compilation Check
+      run: npm run build
