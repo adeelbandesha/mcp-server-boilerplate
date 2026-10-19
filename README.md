@@ -162,7 +162,7 @@ For Notion, share the database with your integration (database menu → *Connect
 ## Testing
 
 ```bash
-npm test               # builds, then runs node --test (unit tests next to the code)
+npm test               # builds, then runs node --test on dist/**/*.test.js
 npm run typecheck      # strict type-check only
 ```
 
