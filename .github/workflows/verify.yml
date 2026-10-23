@@ -1,0 +1,36 @@
+name: Continuous Integration Security Check
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  verify-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code Repository
+      uses: actions/checkout@v7
+
+    - name: Setup Node.js Environment
+      uses: actions/setup-node@v7
+      with:
+        node-version: '22'
+        cache: 'npm'
+
+    - name: Install Dependencies Safely
+      run: npm ci
+
+    - name: Audit Dependencies
+      run: npm audit --audit-level=high
+
+    - name: Run TypeScript Strict Compilation Check
+      run: npm run build
+
+    - name: Run Unit Tests
+      run: npm test
