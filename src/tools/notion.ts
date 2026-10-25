@@ -86,7 +86,7 @@ function propertyToText(property: NotionProperty): string {
 }
 
 function escapeTableCell(value: string): string {
-  return value.replace(/\|/g, "\\|").replace(/\r?\n/g, "<br>");
+  return value.replace(/[\\|]/g, "\\$&").replace(/\r?\n/g, "<br>");
 }
 
 /** Renders one data source query as a Markdown section: a table with the title column first, one row per page. */

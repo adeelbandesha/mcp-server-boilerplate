@@ -32,3 +32,18 @@ test("reports an empty database", () => {
 test("uses the data source name as the section heading", () => {
   assert.match(formatDataSourceAsMarkdown("Tasks", { has_more: false, results: [] }), /^## Tasks\n/);
 });
+
+test("escapes backslashes so a literal \\| cannot split a cell", () => {
+  const response: NotionQueryResponse = {
+    has_more: false,
+    results: [
+      {
+        id: "page-1",
+        url: "https://notion.so/page-1",
+        properties: { Name: { type: "title", title: [{ plain_text: "a\\|b" }] } },
+      },
+    ],
+  };
+
+  assert.match(formatDataSourceAsMarkdown("Tasks", response), /^\| a\\\\\\\|b \| \[open\]/m);
+});
