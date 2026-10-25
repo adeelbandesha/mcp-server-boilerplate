@@ -1,0 +1,41 @@
+name: Bug report
+description: Something does not work as documented.
+labels: [bug]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. npm run start:http
+        2. Call tool `system_metrics` with ...
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Relevant stderr output with LOG_LEVEL=debug. Remove tokens and secrets first.
+      render: shell
+  - type: dropdown
+    id: transport
+    attributes:
+      label: Transport
+      options: [stdio, http]
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Commit or version, Node.js version, OS, and MCP client.
+      placeholder: 1.0.0, Node 22.9, Ubuntu 24.04, Claude Desktop
+    validations:
+      required: true
