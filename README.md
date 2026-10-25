@@ -234,7 +234,7 @@ Things to know before exposing the server:
 - **`MCP_AUTH_TOKEN` is one shared secret.** For per-user identity or scopes, use OAuth: `requireBearerAuth` and `mcpAuthMetadataRouter` from `@modelcontextprotocol/express`. Tools then receive the verified identity on `ctx.http.authInfo`.
 - **Don't commit `.env`.** `.env` and `.env.*` are git-ignored; only `.env.example` is tracked.
 
-Report vulnerabilities privately to the maintainers rather than in a public issue.
+Report vulnerabilities privately as described in [SECURITY.md](SECURITY.md), never in a public issue.
 
 ## Troubleshooting
 
