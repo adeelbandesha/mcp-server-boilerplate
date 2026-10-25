@@ -25,7 +25,8 @@ const environmentSchema = z.object({
 });
 
 function loadConfig(environment: NodeJS.ProcessEnv): ServerConfig {
-  const parsed = environmentSchema.safeParse(environment);
+  // Empty values (e.g. `PORT=` or compose `${UNSET}`) mean "unset", not invalid.
+  const parsed = environmentSchema.safeParse(Object.fromEntries(Object.entries(environment).filter(([, value]) => value !== "")));
   if (!parsed.success) {
     throw new Error(`Invalid environment: ${z.prettifyError(parsed.error)}`);
   }
@@ -111,7 +112,7 @@ async function main(): Promise<void> {
 
   let shuttingDown = false;
   const handleSignal = (signal: NodeJS.Signals): void => {
-    if (shuttingDown) return;
+    if (shuttingDown) process.exit(1); // second signal forces exit if graceful close hangs
     shuttingDown = true;
     logger.info("Shutting down", { signal });
     shutdown()

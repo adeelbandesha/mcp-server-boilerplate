@@ -11,7 +11,7 @@ const configuredLevel = process.env.LOG_LEVEL?.toLowerCase();
 const threshold: LogLevel = isLogLevel(configuredLevel) ? configuredLevel : "info";
 
 function serializeErrors(_key: string, value: unknown): unknown {
-  return value instanceof Error ? { name: value.name, message: value.message, stack: value.stack } : value;
+  return value instanceof Error ? { name: value.name, message: value.message, stack: value.stack, cause: value.cause } : value;
 }
 
 /** Writes one JSON line to stderr; stdout belongs to the stdio JSON-RPC channel. */
